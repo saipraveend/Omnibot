@@ -1,45 +1,16 @@
 (function(){
 
 	var settings = {
-		channel: 'pi-house',
-		publish_key: 'demo',
-		subscribe_key: 'demo'
+		channel: 'OmniBot',
+		publish_key: 'pub-c-08f167b9-9f7c-4836-817a-dc1aec9c406b',
+		subscribe_key: 'sub-c-23afba32-6a44-11e5-a5be-02ee2ddab7fe'
 	};
 
 	var pubnub = PUBNUB(settings);
 
-	var door = document.getElementById('door');
-	var lightLiving = document.getElementById('lightLiving');
-	var lightPorch = document.getElementById('lightPorch');
-	var fireplace = document.getElementById('fireplace');
-
-	pubnub.subscribe({
-		channel: settings.channel,
-		callback: function(m) {
-			if(m.temperature) {
-				document.querySelector('[data-temperature]').dataset.temperature = m.temperature;
-			}
-			if(m.humidity) {
-				document.querySelector('[data-humidity]').dataset.humidity = m.humidity;
-			}
-		}
-	})
-
-	/* 
-		Data settings:
-
-		Servo
-
-		item: 'door'
-		open: true | false
-
-		LED
-
-		item: 'light-*'
-		brightness: 0 - 10
-
-	*/
-
+	var xval = document.getElementById('xval');
+	var yval = document.getElementById('yval');
+	
 	function publishUpdate(data) {
 		pubnub.publish({
 			channel: settings.channel, 
@@ -49,19 +20,12 @@
 
 	// UI EVENTS
 
-	door.addEventListener('change', function(e){
-		publishUpdate({item: 'door', open: this.checked});
+	xval.addEventListener('change', function(e){
+		publishUpdate({item: 'xval', xval: +this.value});
 	}, false);
 
-	lightLiving.addEventListener('change', function(e){
-		publishUpdate({item: 'light-living', brightness: +this.value});
+	yval.addEventListener('change', function(e){
+		publishUpdate({item: 'yval', yval: +this.value});
 	}, false);
 
-	lightPorch.addEventListener('change', function(e){
-		publishUpdate({item: 'light-porch', brightness: +this.value});
-	}, false);
-
-	fireplace.addEventListener('change', function(e){
-		publishUpdate({item: 'fireplace', brightness: +this.value});
-	}, false);
 })();
