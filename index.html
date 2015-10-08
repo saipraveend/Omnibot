@@ -36,9 +36,6 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-        	
-       publish(xval)
-        	
             var joystickView = new JoystickView(150, function(callbackView){
                 $("#joystickContent").append(callbackView.render().el);
                 setTimeout(function(){
@@ -70,10 +67,10 @@
           connect : publish
         });
         
-        function publish(a) {
+        function publish() {
           pubnub.publish({
             channel: 'Robot',
-            message: a,
+            message: "#xval",
             callback : function(m){console.log(m)}
           });
         }
