@@ -1,5 +1,5 @@
 (function(){
-/*
+
 	var settings = {
 		channel: 'Robot',
 		publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0',
@@ -29,5 +29,5 @@
 		publishUpdate({item: 'xval',this.x});
 
 		publishUpdate({item: 'yval', this.y});
-*/
+
 })();
