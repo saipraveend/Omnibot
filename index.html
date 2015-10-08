@@ -8,6 +8,11 @@
 	<meta name="author" content="@saipraveend">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/style.css">
+
+	    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="js/underscore-min.js"></script>
+        <script type="text/javascript" src="js/backbone-min.js"></script>
+        <script type="text/javascript" src="js/joystick_view.js"></script>
 </head>
 
 <body>
@@ -16,27 +21,38 @@
 		Omni<strong>BOT</strong>
 		<div class="pubnub"></div>
 	</header>
-	<section class="container">
-		<section class="pref-container">
-			<section class="preference">
-				<div>
-					<div class="caption">Forward</div>
-					<label for="door">
-						<input id="door" type="checkbox">
-						<div class="toggle-button">
-							<div class="switch"></div>
-						</div>
-					</label>
-				</div>
 
-			</section>
+<script type="text/html" id="joystick-view">
+    <canvas id="joystickCanvas" width="<%= squareSize %>" height="<%= squareSize %>" style="width: <%= squareSize %>px; height: <%= squareSize %>px;">
+        </canvas>
+    </script>
 
-		</section>
+    <div id="joystickContent">
+    </div>
+    <div>
+        x: <span id="xVal"></span><br/>
+        y: <span id="yVal"></span><br/>
+    </div>
 
-	</section>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var joystickView = new JoystickView(150, function(callbackView){
+                $("#joystickContent").append(callbackView.render().el);
+                setTimeout(function(){
+                    callbackView.renderSprite();
+                }, 0);
+            });
+            joystickView.bind("verticalMove", function(y){
+                $("#yVal").html(y);
+            });
+            joystickView.bind("horizontalMove", function(x){
+                $("#xVal").html(x);
+            });
+        });
+    </script>
 
 	<footer>
-
+Enjoy !!
 	</footer>
 
 	<script src="http://cdn.pubnub.com/pubnub-3.7.11.min.js"></script>
