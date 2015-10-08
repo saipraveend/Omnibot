@@ -63,7 +63,7 @@
         pubnub.subscribe({
           channel: 'Robot',
           message: function(m){console.log(m)},
-          connect : publish()
+          connect : publish
         });
         
         function publish() {
