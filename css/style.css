@@ -330,21 +330,21 @@ input[type=checkbox] {
 	text-shadow: 0 -1px 1px #093B5C;
 }
 .toggle-button:before {
-	content: "ON";
+	content: "";
 	padding-left: 28px;
 
 }
 .toggle-button:after {
-	content: "OFF";
+	content: "";
 	padding-left: 42px;
 }
 label[for=door] .toggle-button:before {
-	content: "ON";
+	content: "";
 	padding-left: 10px;
 
 }
 label[for=door] .toggle-button:after {
-	content: "OFF";
+	content: "";
 	padding-left: 4px;
 }
 .toggle-button .switch { 
