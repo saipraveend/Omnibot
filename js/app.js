@@ -1,10 +1,16 @@
 (function(){
 
 	var settings = {
-		channel: 'OmniBot',
-		publish_key: 'pub-c-08f167b9-9f7c-4836-817a-dc1aec9c406b',
-		subscribe_key: 'sub-c-23afba32-6a44-11e5-a5be-02ee2ddab7fe'
+		channel: 'Robot',
+		publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0',
+		subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f'
 	};
+
+	  PUBNUB_demo.subscribe({
+          channel: 'Robot',
+          message: function(m){console.log(m)},
+          connect : publish
+        });
 
 	var pubnub = PUBNUB(settings);
 
@@ -20,12 +26,8 @@
 
 	// UI EVENTS
 
-	xval.addEventListener('change', function(e){
-		publishUpdate({item: 'xval', xval: +this.value});
-	}, false);
+		publishUpdate({item: 'xval',this.x});
 
-	yval.addEventListener('change', function(e){
-		publishUpdate({item: 'yval', yval: +this.value});
-	}, false);
+		publishUpdate({item: 'yval', this.y});
 
 })();
