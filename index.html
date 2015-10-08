@@ -3,7 +3,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title>OmniBot Interface by Sai</title>
+	<title>OmniBot Web Interface</title>
 	<meta name="description" content="A simple web interface to control the omni robot through internet">
 	<meta name="author" content="@saipraveend">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,7 +70,7 @@
         function publish() {
           pubnub.publish({
             channel: 'Robot',
-            message: "#xval",
+            message: xval,
             callback : function(m){console.log(m)}
           });
         }
