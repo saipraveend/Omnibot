@@ -224,4 +224,27 @@ JoystickView = Backbone.View.extend({
         this.renderSprite();
         return this;
     }
+
+//added
+var settings = {
+        channel: 'Robot',
+        publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0',
+        subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f'
+    };
+
+      
+
+    var pubnub = PUBNUB(settings);
+
+    
+    function publishUpdate(data) {
+        pubnub.publish({
+            channel: settings.channel, 
+            message: data
+        });
+    }
+
+        publishUpdate({this.x});
+
+        publishUpdate({this.y});
 });
