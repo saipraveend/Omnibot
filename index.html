@@ -70,7 +70,7 @@
         function publish() {
           pubnub.publish({
             channel: 'Robot',
-            message: xval,
+            message: "#xval",
             callback : function(m){console.log(m)}
           });
         }
