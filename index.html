@@ -60,6 +60,12 @@
           subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f'
         });
         
+        PUBNUB_demo.subscribe({
+          channel: 'Robot',
+          message: function(m){console.log(m)},
+          connect : publish
+        });
+        
         function publish() {
           pubnub.publish({
             channel: 'Robot',
