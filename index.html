@@ -13,7 +13,6 @@
         <script type="text/javascript" src="js/underscore-min.js"></script>
         <script type="text/javascript" src="js/backbone-min.js"></script>
         <script type="text/javascript" src="js/joystick_view.js"></script>
-        <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
 </head>
 
 <body>
@@ -35,31 +34,6 @@
     </div>
     
   <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
-    <script charset="utf-8">
-      (function(){
-    
-        var pubnub = PUBNUB.init({
-          publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0',
-          subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f'
-        });
-        
-        pubnub.subscribe({
-          channel: 'Robot',
-          message: function(m){console.log(m)},
-          connect : publish
-        });
-        
-        function publish(z) {
-          pubnub.publish({
-            channel: 'Robot',
-            message: z,
-            callback : function(m){console.log(m)}
-          });
-        }
-        
-      })();
-    </script>
-    
     <script type="text/javascript">
         $(document).ready(function(){
             var joystickView = new JoystickView(150, function(callbackView){
@@ -73,7 +47,20 @@
             });
             joystickView.bind("horizontalMove", function(x){
                 $("#xVal").html(x);
-                publish(x);
+                
+                var pubnub = PUBNUB({
+               subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f', // always required
+               publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0'    // only required if publishing
+                });
+
+                pubnub.subscribe({
+                channel: 'Robot',
+                message: function(m){console.log(m);},
+                connect: pubnub.publish({
+               channel: 'Robot',        
+               message: x
+                })
+            }); 
             });
         });
     </script>
