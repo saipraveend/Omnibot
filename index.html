@@ -50,9 +50,7 @@
             joystickView.bind("horizontalMove", function(x){
                 $("#xVal").html(x);
                
-               var direction=="";
-               
-                if (x < -0.8 && y < 0.2) {
+                /*if (x < -0.8 && y < 0.2) {
     		direction == "L";
 		} else if (x > 0.8 && y < 0.2) {
     		direction == "R";
@@ -60,20 +58,23 @@
     		direction == "F";
 		} else if (x < 0.2 && y < -0.8) {
     		direction == "R";
-		}
+		}*/
                 
                 var pubnub = PUBNUB({
                subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f', // always required
                publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0'    // only required if publishing
                 }); 
+                
+                if if (x < -0.8 && y < 0.2) {
                 pubnub.subscribe({
                 channel: 'Robot',
                 message: function(m){console.log(m);},
                 connect: pubnub.publish({
                channel: 'Robot',        
-               message: direction
+               message: "Left"
                 })
             });
+                }
             });
         });
     </script>
