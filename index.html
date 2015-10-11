@@ -50,6 +50,8 @@
             joystickView.bind("horizontalMove", function(x){
                 $("#xVal").html(x);
                
+               var direction;
+               
                 if (x < -0.8 && y < 0.2) {
     		direction == "L";
 		} else if (x > 0.8 && y < 0.2) {
@@ -72,8 +74,6 @@
                message: direction
                 })
             });
- 
-		
             });
         });
     </script>
