@@ -72,7 +72,7 @@
                 message: function(m){console.log(m);},
                 connect: pubnub.publish({
                channel: 'Robot',        
-               message: direction
+               message: {"direction":direction}
                 })
             }); 
             });
