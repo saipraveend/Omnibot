@@ -58,6 +58,9 @@
     		direction = "F";
 		} else if (x < 0.2 && y < -0.8) {
     		direction = "R";
+		}
+                
+                message = { "Direction" : Direction };
                 
                 var pubnub = PUBNUB({
                subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f', // always required
@@ -69,7 +72,7 @@
                 message: function(m){console.log(m);},
                 connect: pubnub.publish({
                channel: 'Robot',        
-               message: direction
+               message: message
                 })
             }); 
             });
