@@ -49,9 +49,7 @@
             
             joystickView.bind("horizontalMove", function(x){
                 $("#xVal").html(x);
-                
-                function direction()
-                {
+               
                 if (x < -0.8 && y < 0.2) {
     		direction = "L";
 		} else if (x > 0.8 && y < 0.2) {
@@ -61,8 +59,6 @@
 		} else if (x < 0.2 && y < -0.8) {
     		direction = "R";
 		}
-		return direction;
-                }
                 
                 var pubnub = PUBNUB({
                subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f', // always required
@@ -73,7 +69,7 @@
                 message: function(m){console.log(m);},
                 connect: pubnub.publish({
                channel: 'Robot',        
-               message: direction()
+               message: direction
                 })
             });
  
