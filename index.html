@@ -51,13 +51,13 @@
                 $("#xVal").html(x);
                
                 if (x < -0.8 && y < 0.2) {
-    		direction = "L";
+    		direction == "L";
 		} else if (x > 0.8 && y < 0.2) {
-    		direction = "R";
+    		direction == "R";
 		} else if (x < 0.2 && y > 0.8) {
-    		direction = "F";
+    		direction == "F";
 		} else if (x < 0.2 && y < -0.8) {
-    		direction = "R";
+    		direction == "R";
 		}
                 
                 var pubnub = PUBNUB({
