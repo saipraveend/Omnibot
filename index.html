@@ -65,7 +65,7 @@
                publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0'    // only required if publishing
                 }); 
                 
-                if if (x < -0.8 && y < 0.2) {
+                if (x < -0.8 && y < 0.2) {
                 pubnub.subscribe({
                 channel: 'Robot',
                 message: function(m){console.log(m);},
