@@ -62,8 +62,6 @@
     		direction = "R";
 		}
                 
-                message = { "Direction" : Direction };
-                
                 var pubnub = PUBNUB({
                subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f', // always required
                publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0'    // only required if publishing
@@ -74,11 +72,10 @@
                 message: function(m){console.log(m);},
                 connect: pubnub.publish({
                channel: 'Robot',        
-               message: message
+               message: direction
                 })
             }); 
             });
-        });
         });
     </script>
 
