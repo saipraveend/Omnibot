@@ -27,19 +27,19 @@
 	}
 
 	if (xval == 1) {
-		data = {direction: 'Right'}
+		data = {'direction': 'Right'}
 		publishUpdate(data);
 	}
 	else if (xval == -1) {
-		data = {direction : 'left'}
+		data = {'direction' : 'left'}
 		publishUpdate(data);
 	}
 	else if (yval == 1) {
-		data = {direction : 'up'}
+		data = {'direction' : 'up'}
 		publishUpdate(data);
 	}
 	else if (yval == -1) {
-		data = {direction : 'down'}
+		data = {'direction' : 'down'}
 		publishUpdate(data);
 	}
 
