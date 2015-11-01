@@ -32,7 +32,7 @@
         x: <span id="xVal"></span><br/>
         y: <span id="yVal"></span><br/>
     </div>
-    
+
   <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -42,45 +42,74 @@
                     callbackView.renderSprite();
                 }, 0);
             });
-            
+
+						var settings = {
+							channel: 'Robot',
+							publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0',
+							subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f'
+						};
+
+
+            var x_old=0;
+						var y_old=0;
+						var pubnub = PUBNUB(settings);
+
+						pubnub.subscribe({
+									channel: 'Robot',
+									message: function(m){console.log(m)},
+									//connect : publish
+								});
+
             joystickView.bind("verticalMove", function(y){
                 $("#yVal").html(y);
-            });
-            
-            joystickView.bind("horizontalMove", function(x){
-                $("#xVal").html(x);
-               
-                /*if (x < -0.8 && y < 0.2) {
-    		direction == "L";
-		} else if (x > 0.8 && y < 0.2) {
-    		direction == "R";
-		} else if (x < 0.2 && y > 0.8) {
-    		direction == "F";
-		} else if (x < 0.2 && y < -0.8) {
-    		direction == "R";
-		}*/
-                
-                var pubnub = PUBNUB({
-               subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f', // always required
-               publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0'    // only required if publishing
-                }); 
-                
-                if (x < -0.8 && y < 0.2) {
-                pubnub.subscribe({
-                channel: 'Robot',
-                message: function(m){console.log(m);},
-                connect: pubnub.publish({
-               channel: 'Robot',        
-               message: "Left"
-                })
-            });
+
+								if (y == 1 && y!=y_old) {
+
+									pubnub.publish({
+										channel: settings.channel,
+										message: "up"
+									});
+
+
                 }
+
+								else if ( y == -1 && y!=y_old) {
+									pubnub.publish({
+										channel: settings.channel,
+										message: "down"
+									});
+
+								}
+               y_old = y;
             });
+
+            joystickView.bind("horizontalMove", function(x){
+
+                $("#xVal").html(x);
+                if (x == 1 && x!=x_old) {
+									pubnub.publish({
+										channel: settings.channel,
+										message: "right"
+									});
+                }
+
+								else if ( x == -1 && x!=x_old) {
+									pubnub.publish({
+										channel: settings.channel,
+										message: "left"
+									});
+
+								}
+
+								x_old = x;
+            });
+
+
         });
     </script>
 
 	<footer>
 	</footer>
-	
+
 </body>
 </html>

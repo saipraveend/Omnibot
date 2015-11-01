@@ -1,13 +1,13 @@
 (function(){
 
 	var settings = {
-		channel: 'Robot',
-		publish_key: 'pub-c-358b7e07-32d8-454b-a910-ad8208cb68c0',
-		subscribe_key: 'sub-c-25fb2b4a-6d97-11e5-b6e2-0619f8945a4f'
+		channel: 'Omnibot',
+		publish_key: 'pub-c-0d652f8b-a119-48b8-b625-9953fdaf67bb',
+		subscribe_key: 'sub-c-5b803346-6f22-11e5-b932-02ee2ddab7fe'
 	};
 
 	  PUBNUB_demo.subscribe({
-          channel: 'Robot',
+          channel: 'Omnibot',
           message: function(m){console.log(m)},
           connect : publish
         });
@@ -17,6 +17,8 @@
 	var xval = document.getElementById('xval');
 	var yval = document.getElementById('yval');
 	
+	
+	
 	function publishUpdate(data) {
 		pubnub.publish({
 			channel: settings.channel, 
@@ -24,10 +26,21 @@
 		});
 	}
 
-	// UI EVENTS
-
-		publishUpdate({item: 'xval',this.x});
-
-		publishUpdate({item: 'yval', this.y});
+	if (xval == 1) {
+		data = {'direction': 'Right'}
+		publishUpdate(data);
+	}
+	else if (xval == -1) {
+		data = {'direction' : 'left'}
+		publishUpdate(data);
+	}
+	else if (yval == 1) {
+		data = {'direction' : 'up'}
+		publishUpdate(data);
+	}
+	else if (yval == -1) {
+		data = {'direction' : 'down'}
+		publishUpdate(data);
+	}
 
 })();
